@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from models import Book
 from dotenv import load_dotenv
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Vercel + FastAPI",
@@ -16,12 +17,16 @@ load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL", "")
 
 # Connect to MongoDB
-print("\n\ndatabase string",DATABASE_URL)
-
 client = MongoClient(DATABASE_URL)
-
 db = client["bookstorage"]
 collection = db["books"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[os.getenv("CLIENT_URL")],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
     
 # get all books
