@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
-
+from pymongo import MongoClient
+from models import Book
+from dotenv import load_dotenv
+import os
 
 app = FastAPI(
     title="Vercel + FastAPI",
@@ -8,6 +11,26 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# Get environment variables with fallbacks
+load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL", "")
+
+# Connect to MongoDB
+print("\n\ndatabase string",DATABASE_URL)
+
+client = MongoClient(DATABASE_URL)
+
+db = client["bookstorage"]
+collection = db["books"]
+
+    
+# get all books
+@app.get("/books")
+async def get_books():
+    books = []
+    for book in collection.find():
+        books.append(Book(**book))
+    return books
 
 @app.get("/api/data")
 def get_sample_data():
