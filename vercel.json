@@ -5,7 +5,7 @@
         "src": "/(.*)", 
         "dest": "/", 
         "headers": {
-            "Access-Control-Allow-Origin": "*"
+            "Access-Control-Allow-Origin": "https://my-bookshelf-frontend.vercel.app/"
         } 
     }
   ]
