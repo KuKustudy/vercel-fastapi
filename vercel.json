@@ -5,7 +5,7 @@
         "src": "/(.*)", 
         "dest": "/", 
         "headers": {
-            "Access-Control-Allow-Origin": "https://my-bookshelf-frontend.vercel.app/"
+            "Access-Control-Allow-Origin": "https://my-bookshelf-frontend-fum7so6be-wingyees-projects-3538c941.vercel.app/"
         } 
     }
   ]
